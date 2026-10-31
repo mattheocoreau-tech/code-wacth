@@ -135,7 +135,7 @@ function renderRow(c) {
     h('div', { class: 'codecell' }, h('span', { class: 'code', text: c.code }),
       h('button', { class: 'btn ghost small', type: 'button', onclick: () => copy(c.code), 'aria-label': `Copier le code ${c.code}` }, 'Copier')),
     h('div', {}, h('div', { text: c.rewards || 'Récompense inconnue' }),
-      h('div', { class: 'meta' }, `Découvert le ${shortDate(c.firstSeen)}. `, c.expiresAt ? `Expire le ${shortDate(c.expiresAt)}. ` : 'Date d’expiration inconnue. ', 'Sources : ', joined.length ? joined : 'aucune', '.'),
+      h('div', { class: 'meta' }, c.baseline ? `Déjà présent à la première lecture (${shortDate(c.firstSeen)}). ` : `Découvert le ${shortDate(c.firstSeen)}. `, c.expiresAt ? `Expire le ${shortDate(c.expiresAt)}. ` : 'Date d’expiration inconnue. ', 'Sources : ', joined.length ? joined : 'aucune', '.'),
       c.status !== 'expired' && h('div', { class: 'meta', text: `${trustNote(c)} — ${c.statusReason}.` }),
       c.status === 'expired' && h('div', { class: 'meta', text: `${c.statusReason}.` })),
     h('div', {}, badge(c.status)));
@@ -172,7 +172,7 @@ function render() {
   if (!S.status) { main.replaceChildren(h('h1', { text: 'Codes cadeaux' }), h('p', { class: 'empty', text: S.loadError || 'Chargement…' })); renderNav(); return; }
   renderNav();
   const m = location.hash.match(/^#\/jeu\/([\w-]+)/);
-  main.replaceChildren(...(m ? renderGame(m[1]) : renderHome()));
+  main.replaceChildren(...(m ? renderGame(m[1]) : renderHome()).filter(Boolean));
 }
 
 // ---------- Réglages ----------

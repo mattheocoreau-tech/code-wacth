@@ -14,7 +14,7 @@ test('looksLikeCode rejette mots courants, espaces réservés, années, minuscul
 test('HTML structuré : statut par section, barré, tableau, étapes ignorées, espaces réservés ignorés', () => {
   const html = `<article><h2>Active codes</h2><ul><li><strong>TESTALPHA</strong> – 500 Gems</li><li>TESTBETA2 - 3 Rerolls</li></ul>
   <h2>Expired codes</h2><ul><li><strong>OLDONE</strong> – 100 Gold</li></ul>
-  <h2>How to redeem</h2><ol><li>Open the game</li><li>Redeem</li></ol>
+  <h2>How to redeem</h2><ol><li>Open the game</li><li>Redeem</li><li><strong>Release</strong>: junk</li></ol>
   <ul><li><strong>CODE1</strong> - Reward Description</li></ul>
   <h2>All codes: active and expired</h2><ul><li><s>STRUCK9</s></li><li><strong>MIXEDHEAD</strong></li></ul>
   <table><tr><td><strong>TBL42</strong></td><td>2 chips (expires on 2026-12-01)</td></tr></table></article>`;
@@ -55,4 +55,19 @@ test('flux Atom (YouTube) et RSS : lecture, filtre d\'ancienneté, extraction', 
   const rss = `<rss><channel><item><title>Codes</title><link>https://r.test/1</link><pubDate>Thu, 29 Oct 2026 10:00:00 GMT</pubDate><description>&lt;p&gt;Code: RSSTEST55&lt;/p&gt;</description></item></channel></rss>`;
   assert.equal(itemsFromFeed(rss, { url: 'x' }, now)[0].code, 'RSSTEST55');
   assert.throws(() => parseFeed('<html></html>'), /non reconnu/);
+});
+
+test('formats réels : liste « CODE - récompense (NEW) » sous plusieurs <article>, tableau Code/Récompense, mots à majuscule initiale sous un titre de section', () => {
+  const html = `<body><article><h3>Related</h3><p>teaser</p></article><article>
+    <h2>New Anime Vanguards codes</h2><ul><li>1stAnniversary - 100 rerolls (NEW)</li><li>AnotherUnit</li><li>Freedom - 5 gems</li></ul>
+    <h2>Expired codes</h2><ul><li>LateUpdate</li><li>Oops</li><li>WHYISTHISNOTWORKING?????</li></ul>
+    <h2>Working codes for January 2026</h2><table><tr><th>Code</th><th>Reward</th></tr><tr><td>HappyHolidays</td><td>200 RR</td></tr><tr><td>DoubleDigits</td><td>20 rerolls, 10 stat chips</td></tr></table>
+    <h2>How to redeem</h2><ul><li>Redeem</li><li>Click</li></ul></article></body>`;
+  const by = Object.fromEntries(extractFromHtml(html).map((i) => [i.code, i]));
+  assert.deepEqual(Object.keys(by).sort(), ['1stAnniversary', 'AnotherUnit', 'DoubleDigits', 'Freedom', 'HappyHolidays', 'LateUpdate', 'Oops']);
+  assert.equal(by['1stAnniversary'].statedStatus, 'active');
+  assert.equal(by['1stAnniversary'].rewards, '100 rerolls (NEW)');
+  assert.equal(by.Oops.statedStatus, 'expired');
+  assert.equal(by.HappyHolidays.rewards, '200 RR');
+  assert.equal(by.DoubleDigits.rewards, '20 rerolls, 10 stat chips');
 });

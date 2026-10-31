@@ -35,5 +35,6 @@ export async function fetchSource(source, ctx) {
   const res = await ctx.get(url, { accept });
   const items = source.type === 'html' ? extractFromHtml(res.text, { ...(source.extract || {}), selector: source.selector, exclude: source.exclude })
     : itemsFromFeed(res.text, source, ctx.now);
-  return { items: items.map((i) => ({ ...i, url: i.url || url })) };
+  const title = (res.text.match(/<title[^>]*>([^<]{0,80})/i) || [])[1]?.trim() || '';
+  return { items: items.map((i) => ({ ...i, url: i.url || url })), info: `page de ${Math.round(res.text.length / 1024)} Ko, titre « ${title || 'aucun'} »` };
 }

@@ -87,7 +87,7 @@ export async function runOnce(opts = {}) {
         st.suspect = true;
         st.warning = `0 code détecté alors que ${st.lastCount} l'étaient avant : résultat ignoré (mise en page modifiée ?)`;
         log('WARN', `${key} : ${st.warning}`);
-      } else st.warning = 'aucun code détecté sur cette source';
+      } else st.warning = `aucun code détecté sur cette source (${r.res.info || 'page vide'}) : mise en page non reconnue, page protégée ou chargée par JavaScript`;
       continue;
     }
     st.suspect = false;

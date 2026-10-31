@@ -12,7 +12,7 @@ const STOP = new Set(
 const PLACEHOLDER = /^(?:CODE|CODES|REWARD|REWARDS|EXAMPLE|EXEMPLE|XXX+|YYY+|YOURCODE|ENTERCODE|CODEHERE|NEWCODE|SAMPLE|TEST)\d*$/i;
 const EXPIRED_RE = /\b(expired|no longer (?:works?|valid|active)|inactive|doesn'?t work|not working)\b|expiré|périmé/i;
 const H_EXPIRED = /\b(expired|inactive|old codes?|no longer|ended|outdated|dead)\b|expiré|périmé/i;
-const H_ACTIVE = /\b(active|working|valid|latest|current|new codes?|available)\b|actif|valide|nouveau/i;
+const H_ACTIVE = /\b(active|working|valid|latest|current|available)\b|\bnew\b[\w\s]{0,40}\bcodes?\b|actif|valide|nouveau/i;
 
 /** Un jeton ressemble-t-il à un code ? Volontairement strict : mieux vaut en manquer un que d'en inventer un. */
 export function looksLikeCode(tok, o = {}) {
@@ -113,7 +113,8 @@ export function extractFromHtml(html, o = {}) {
   const $ = cheerio.load(html);
   $('script,style,noscript,nav,header,footer,aside,form,iframe,svg,[class*="comment"],[id*="comment"],[class*="related"],[class*="sidebar"],[class*="cookie"]').remove();
   if (o.exclude) $(o.exclude).remove();
-  const root = o.selector ? $(o.selector) : $('article').length ? $('article').first() : $('main').length ? $('main').first() : $('body');
+  // Sans sélecteur, on lit toute la page (une page peut contenir plusieurs <article>) ; le bruit est déjà retiré plus haut.
+  const root = o.selector ? $(o.selector) : $('body');
   const found = new Map();
 
   const sectionStatus = (el) => {
@@ -139,7 +140,7 @@ export function extractFromHtml(html, o = {}) {
   // 1) jeton mis en évidence (gras, code…) au début d'une ligne de liste / de tableau / d'un paragraphe
   root.find('strong,b,code,kbd,mark').each((_, el) => {
     const tok = stripEdges(norm($(el).text()));
-    if (!looksLikeCode(tok, { ...o, structured: true })) return;
+    if (!looksLikeCode(tok, { ...o, structured: true, allowCapitalized: o.allowCapitalized || sectionStatus(el) !== null })) return;
     let block = $(el).closest('li,tr,td,dd,p');
     if (block.is('td') && block.closest('tr').length && block.prevAll('td,th').length === 0) block = block.closest('tr');
     if (!block.length) return;
@@ -153,7 +154,8 @@ export function extractFromHtml(html, o = {}) {
   root.find('li,td').each((_, el) => {
     const text = norm($(el).text());
     const m = text.match(/^([A-Za-z0-9_!]{3,32})(?:\s*[-–—:|=→]\s*(.+))?$/);
-    if (!m || !looksLikeCode(m[1], o)) return;
+    // Sous un titre « codes actifs / expirés », un mot à majuscule initiale (ex. « Freedom ») est bien un code.
+    if (!m || !looksLikeCode(m[1], { ...o, allowCapitalized: o.allowCapitalized || sectionStatus(el) !== null })) return;
     const row = $(el).is('td') && $(el).prevAll('td,th').length === 0 ? $(el).closest('tr') : $(el);
     push(m[1], norm(row.text()), el, 0);
   });
