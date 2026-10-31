@@ -1,0 +1,77 @@
+name: surveillance-codes
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+  push:
+    paths: ['codes-watch/**']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: surveillance
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    defaults:
+      run:
+        working-directory: codes-watch
+    outputs:
+      changed: ${{ steps.run.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: codes-watch/package-lock.json
+      - run: npm ci
+      - name: Mémoire des dernières vérifications
+        uses: actions/cache@v4
+        with:
+          path: codes-watch/.runtime
+          key: lastcheck-${{ github.run_id }}
+          restore-keys: lastcheck-
+      - name: Surveillance
+        id: run
+        run: node src/run.js
+        env:
+          FORCE: ${{ github.event_name != 'schedule' && '1' || '0' }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      - name: Enregistrer les changements
+        run: |
+          git config user.name  "codes-watch[bot]"
+          git config user.email "codes-watch@users.noreply.github.com"
+          git add site/data
+          if ! git diff --cached --quiet; then
+            git commit -m "données : mise à jour des codes"
+            for i in 1 2 3; do git pull --rebase -q && git push -q && break || sleep 5; done
+          fi
+
+  deploy:
+    needs: watch
+    if: needs.watch.outputs.changed == 'true' || github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: codes-watch/site
+      - id: deployment
+        uses: actions/deploy-pages@v4
