@@ -1,4 +1,59 @@
 {
   "schema": 1,
-  "events": []
+  "events": [
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Late",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    },
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Spring",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    },
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Freedom",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    },
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Sasageyo",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    },
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Kat",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    },
+    {
+      "at": "2026-10-31T00:51:43.021Z",
+      "type": "new_code",
+      "gameId": "anime-vanguards",
+      "code": "Oops",
+      "rewards": null,
+      "source": "thespike",
+      "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes"
+    }
+  ]
 }
