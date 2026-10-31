@@ -1,0 +1,11 @@
+{
+  "checkIntervalMinutes": 10,
+  "newCodeWindowHours": 48,
+  "activeScoreThreshold": 2,
+  "notifications": {
+    "enabled": false,
+    "discord": { "enabled": false },
+    "telegram": { "enabled": false },
+    "ntfy": { "enabled": false }
+  }
+}

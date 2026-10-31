@@ -1,0 +1,16 @@
+{
+  "name": "codes-watch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Surveillance automatique de codes cadeaux (redeem codes) pour jeux vidéo",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/run.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "fast-xml-parser": "^5.11.2"
+  }
+}

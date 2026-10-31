@@ -1,0 +1,18 @@
+{
+  "games": [
+    {
+      "id": "anime-vanguards",
+      "name": "Anime Vanguards",
+      "enabled": true,
+      "notify": true,
+      "sources": [
+        { "id": "pcgamesn", "type": "html", "url": "https://www.pcgamesn.com/anime-vanguards/codes", "trust": "medium" },
+        { "id": "thespike", "type": "html", "url": "https://thespike.gg/roblox/game-codes/anime-vanguards-codes", "trust": "medium" }
+      ]
+    },
+    { "id": "anime-astral", "name": "Anime Astral", "enabled": true, "notify": true, "sources": [] },
+    { "id": "anime-last-stand", "name": "Anime Last Stand", "enabled": true, "notify": true, "sources": [] },
+    { "id": "anime-adventures", "name": "Anime Adventures", "enabled": true, "notify": true, "sources": [] },
+    { "id": "anime-eternal", "name": "Anime Eternal", "enabled": true, "notify": true, "sources": [] }
+  ]
+}
