@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "lastRunAt": "2026-10-31T00:43:52.409Z",
+  "writtenAt": "2026-10-31T00:43:52.409Z",
+  "system": {
+    "state": "ok",
+    "message": "Toutes les sources répondent."
+  },
+  "counts": {
+    "games": 5,
+    "new": 0,
+    "active": 0,
+    "expired": 66,
+    "check": 4,
+    "unknown": 0
+  },
+  "games": [
+    {
+      "id": "anime-vanguards",
+      "name": "Anime Vanguards",
+      "enabled": true,
+      "sources": 2,
+      "counts": {
+        "new": 0,
+        "active": 0,
+        "expired": 66,
+        "check": 4,
+        "unknown": 0
+      }
+    },
+    {
+      "id": "anime-astral",
+      "name": "Anime Astral",
+      "enabled": true,
+      "sources": 0,
+      "counts": {
+        "new": 0,
+        "active": 0,
+        "expired": 0,
+        "check": 0,
+        "unknown": 0
+      }
+    },
+    {
+      "id": "anime-last-stand",
+      "name": "Anime Last Stand",
+      "enabled": true,
+      "sources": 0,
+      "counts": {
+        "new": 0,
+        "active": 0,
+        "expired": 0,
+        "check": 0,
+        "unknown": 0
+      }
+    },
+    {
+      "id": "anime-adventures",
+      "name": "Anime Adventures",
+      "enabled": true,
+      "sources": 0,
+      "counts": {
+        "new": 0,
+        "active": 0,
+        "expired": 0,
+        "check": 0,
+        "unknown": 0
+      }
+    },
+    {
+      "id": "anime-eternal",
+      "name": "Anime Eternal",
+      "enabled": true,
+      "sources": 0,
+      "counts": {
+        "new": 0,
+        "active": 0,
+        "expired": 0,
+        "check": 0,
+        "unknown": 0
+      }
+    }
+  ],
+  "sources": {
+    "anime-vanguards/pcgamesn": {
+      "gameId": "anime-vanguards",
+      "sourceId": "pcgamesn",
+      "type": "html",
+      "trust": "medium",
+      "lastCheck": "2026-10-31T00:43:52.409Z",
+      "ok": true,
+      "lastOk": "2026-10-31T00:43:52.409Z",
+      "consecutiveFailures": 0,
+      "lastError": null,
+      "warning": "aucun code détecté sur cette source"
+    },
+    "anime-vanguards/thespike": {
+      "gameId": "anime-vanguards",
+      "sourceId": "thespike",
+      "type": "html",
+      "trust": "medium",
+      "lastCheck": "2026-10-31T00:43:52.409Z",
+      "ok": true,
+      "lastOk": "2026-10-31T00:43:52.409Z",
+      "consecutiveFailures": 0,
+      "lastError": null,
+      "suspect": false,
+      "warning": null,
+      "baselinedAt": "2026-10-31T00:43:52.409Z",
+      "lastCount": 70
+    }
+  },
+  "configProblems": [],
+  "settings": {
+    "checkIntervalMinutes": 10,
+    "newCodeWindowHours": 48,
+    "activeScoreThreshold": 2,
+    "notificationsEnabled": false
+  }
+}
