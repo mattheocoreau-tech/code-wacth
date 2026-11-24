@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "lastRunAt": "2026-11-23T20:07:30.693Z",
-  "writtenAt": "2026-11-23T20:07:30.693Z",
+  "lastRunAt": "2026-11-24T04:44:53.817Z",
+  "writtenAt": "2026-11-24T04:44:53.817Z",
   "system": {
     "state": "ok",
     "message": "Toutes les sources répondent."
@@ -87,21 +87,21 @@
       "sourceId": "pcgamesn",
       "type": "html",
       "trust": "medium",
-      "lastCheck": "2026-11-23T20:07:30.693Z",
+      "lastCheck": "2026-11-24T04:44:53.817Z",
       "ok": true,
-      "lastOk": "2026-11-23T20:07:30.693Z",
+      "lastOk": "2026-11-24T04:44:53.817Z",
       "consecutiveFailures": 0,
       "lastError": null,
-      "warning": "aucun code détecté sur cette source (page de 184 Ko, titre « Anime Vanguards codes (November 2026) ») : mise en page non reconnue, page protégée ou chargée par JavaScript"
+      "warning": "aucun code détecté sur cette source (page de 199 Ko, titre « Anime Vanguards codes (November 2026) ») : mise en page non reconnue, page protégée ou chargée par JavaScript"
     },
     "anime-vanguards/thespike": {
       "gameId": "anime-vanguards",
       "sourceId": "thespike",
       "type": "html",
       "trust": "medium",
-      "lastCheck": "2026-11-23T20:07:30.693Z",
+      "lastCheck": "2026-11-24T04:44:53.817Z",
       "ok": true,
-      "lastOk": "2026-11-23T20:07:30.693Z",
+      "lastOk": "2026-11-24T04:44:53.817Z",
       "consecutiveFailures": 0,
       "lastError": null,
       "suspect": false,
