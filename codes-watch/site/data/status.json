@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "lastRunAt": "2026-11-27T20:03:44.470Z",
-  "writtenAt": "2026-11-27T20:03:44.470Z",
+  "lastRunAt": "2026-11-28T02:38:13.812Z",
+  "writtenAt": "2026-11-28T02:38:13.812Z",
   "system": {
     "state": "ok",
     "message": "Toutes les sources répondent."
@@ -87,9 +87,9 @@
       "sourceId": "pcgamesn",
       "type": "html",
       "trust": "medium",
-      "lastCheck": "2026-11-27T20:03:44.470Z",
+      "lastCheck": "2026-11-28T02:38:13.812Z",
       "ok": true,
-      "lastOk": "2026-11-27T20:03:44.470Z",
+      "lastOk": "2026-11-28T02:38:13.812Z",
       "consecutiveFailures": 0,
       "lastError": null,
       "warning": "aucun code détecté sur cette source (page de 184 Ko, titre « Anime Vanguards codes (November 2026) ») : mise en page non reconnue, page protégée ou chargée par JavaScript"
@@ -99,9 +99,9 @@
       "sourceId": "thespike",
       "type": "html",
       "trust": "medium",
-      "lastCheck": "2026-11-27T20:03:44.470Z",
+      "lastCheck": "2026-11-28T02:38:13.812Z",
       "ok": true,
-      "lastOk": "2026-11-27T20:03:44.470Z",
+      "lastOk": "2026-11-28T02:38:13.812Z",
       "consecutiveFailures": 0,
       "lastError": null,
       "suspect": false,
